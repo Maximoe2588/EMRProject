@@ -25,7 +25,7 @@ function DemographicsForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here.
+   setIsEditing(false);
   };
 
   const handleEdit = () => {
