@@ -5,8 +5,8 @@ const getAllUsers = async (req, res, next) => {
     const users = await userService.getAllUsers();
     res.json(users);
   } catch (error) {
- 
-    next(error);
+    res.status(500).json({ error: 'Failed to fetch patient information' });
+      
   }
 };
 
@@ -17,7 +17,7 @@ const createUser = async (req, res, next) => {
     const createdUser = await userService.createUser(userData);
     res.status(201).json(createdUser);
   } catch (error) {
- 
+    res.status(500).json({ error: 'Failed to create patient information' });
     next(error);
   }
 };
@@ -33,7 +33,7 @@ const getUserById = async (req, res, next) => {
       res.sendStatus(404);
     }
   } catch (error) {
-    
+    res.status(500).json({ error: 'Failed to fetch patient information' });
     next(error);
   }
 };
@@ -50,7 +50,8 @@ const updateUser = async (req, res, next) => {
       res.sendStatus(404);
     }
   } catch (error) {
-    // Handle any errors
+    res.status(500).json({ error: 'Failed to update patient information' });
+  }
     next(error);
   }
 };
@@ -62,8 +63,7 @@ const deleteUser = async (req, res, next) => {
     await userService.deleteUser(userId);
     res.sendStatus(204);
   } catch (error) {
-    
-    next(error);
+    res.status(500).json({ error: 'Failed to delete patient information' });
   }
 };
 
