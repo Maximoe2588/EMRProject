@@ -1,6 +1,4 @@
-const patientInfoService = require('./patientInfo.service');
-
-
+/*const userService = require('./userService');
 
 
 const register = async (req, res, next) => {
@@ -21,4 +19,4 @@ const register = async (req, res, next) => {
   };
   module.exports = {
     register,
-  };
+  };*/

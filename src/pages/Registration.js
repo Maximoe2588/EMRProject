@@ -10,6 +10,7 @@ function Registration() {
   const handleRegister = async e => {
     e.preventDefault();
     try {
+      console.log('Registering:', username, password);
       await authService.register(username, password);
       navigate('/login');
     } catch (error) {

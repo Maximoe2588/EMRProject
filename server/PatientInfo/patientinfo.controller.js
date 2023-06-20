@@ -53,8 +53,8 @@ const updateUser = async (req, res, next) => {
     res.status(500).json({ error: 'Failed to update patient information' });
   }
     next(error);
-  }
-};
+  };
+
 
 
 const deleteUser = async (req, res, next) => {
@@ -64,6 +64,20 @@ const deleteUser = async (req, res, next) => {
     res.sendStatus(204);
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete patient information' });
+  }
+};
+
+const register = async (req, res, next) => {
+  try {
+    const { name, email, password } = req.body;
+    const userData = { name, email, password };
+
+    const createdUser = await userService.createUser(userData);
+
+    res.status(201).json({ message: 'Registration successful', user: createdUser });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to register user' });
+    next(error);
   }
 };
 

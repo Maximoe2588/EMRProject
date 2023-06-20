@@ -8,5 +8,6 @@ router.post('/', patientInfoController.createPatientInfo);
 router.get('/:id', patientInfoController.getPatientInfoById);
 router.put('/:id', patientInfoController.updatePatientInfo);
 router.delete('/:id', patientInfoController.deletePatientInfo);
+router.post('/register', patientInfoController.register);
 
 module.exports = router;
