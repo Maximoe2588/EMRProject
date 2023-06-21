@@ -6,7 +6,7 @@ const authService = {
     },
     register: async (username, password) => {
         console.log('Registering', username, password);
-        const response = await fetch('http://localhost:3000/register', {
+        const response = await fetch('http://localhost:3000/api/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

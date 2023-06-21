@@ -4,14 +4,15 @@ import authService from '../services/authService';
 
 function Registration() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = async e => {
     e.preventDefault();
     try {
-      console.log('Registering:', username, password);
-      await authService.register(username, password);
+      console.log('Registering:', name, email, password);
+      await authService.register(name, email, password);
       navigate('/login');
     } catch (error) {
       console.error('Registration failed', error);
@@ -24,9 +25,16 @@ function Registration() {
       <form onSubmit={handleRegister}>
         <input 
           type="text"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          placeholder="Username"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          placeholder="Name"
+          required
+        />
+        <input 
+          type="text"
+          value={email} 
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Email"
           required
         />
         <input 
