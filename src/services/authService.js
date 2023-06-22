@@ -4,14 +4,14 @@ const authService = {
         console.log('Logging in', username, password);
         return Promise.resolve();
     },
-    register: async (username, password) => {
-        console.log('Registering', username, password);
+    register: async (name, email, password) => {
+        console.log('Registering', name, email, password);
         const response = await fetch('http://localhost:3000/api/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ name, email, password }),
           });
       
           if (!response.ok) {

@@ -14,11 +14,11 @@ const getAllUsers = async () => {
 
 const createUser = async (userData) => {
   try {
-  
+    console.log('userData');
     const [createdUser] = await knex('users').insert(userData).returning('*');
     return createdUser;
   } catch (error) {
-   
+    console.error(error);
     throw new Error('Failed to create user');
   }
 };
