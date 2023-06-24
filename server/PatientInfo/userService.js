@@ -1,4 +1,4 @@
-const knex = require('../config/database');
+/*const knex = require('../config/database');
 const patientInfoService = require('./patientInfo.service');
 
 const createUser = async (userData) => {
@@ -15,3 +15,4 @@ const createUser = async (userData) => {
 module.exports = {
   createUser,
 };
+*/

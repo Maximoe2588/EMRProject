@@ -3,11 +3,11 @@ const router = express.Router();
 const patientInfoController = require('./patientInfo.controller')
 
 
-router.get('/', patientInfoController.getAllUsers);
-router.post('/', patientInfoController.createUser);
-router.get('/:id', patientInfoController.getUserById);
-router.put('/:id', patientInfoController.updateUser);
-router.delete('/:id', patientInfoController.deleteUser);
+router.get('/users', patientInfoController.getAllUsers);
+router.post('/users', patientInfoController.createUser);
+router.get('/users/:id', patientInfoController.getUserById);
+router.put('/users/:id', patientInfoController.updateUser);
+router.delete('/users/:id', patientInfoController.deleteUser);
 router.post('/register', patientInfoController.register);
 
 
