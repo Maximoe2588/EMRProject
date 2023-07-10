@@ -10,7 +10,7 @@ exports.up = function(knex) {
         table.string('symptomLocation').notNullable();
         table.integer('symptomIntensity').notNullable();
         table.string('symptomOccurrence').notNullable();
-        table.timestamps(true, true);
+        table.timestamps(true, true); " "
       });
 };
 

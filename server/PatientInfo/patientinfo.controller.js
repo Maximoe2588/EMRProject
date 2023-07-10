@@ -74,8 +74,9 @@ const register = async (req, res, next) => {
 
     const createdUser = await userService.createUser(userData);
 
-    res.status(201).json({ message: 'Registration successful', user: createdUser });
-  } catch (error) {
+    res.status(201).json({ message: 'Registration successful', user: { name: createdUser.name, age: createdUser.age },
+  });
+ } catch (error) {
     res.status(500).json({ error: 'Failed to register user' });
     next(error);
   }
