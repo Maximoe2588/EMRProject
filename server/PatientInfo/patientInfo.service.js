@@ -55,10 +55,38 @@ const deleteUser = async (userId) => {
   }
 };
 
+
+const createPrimaryConcern = async (userId, primaryConcernData) => {
+  try {
+    const dataToInsert = {
+      user_id: userId,
+      // Other fields from primaryConcernData
+    };
+    const [createdPrimaryConcern] = await knex('primary_concerns').insert(dataToInsert).returning('*');
+    return createdPrimaryConcern;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to create primary concern');
+  }
+};
+
+const getPrimaryConcernsByUserId = async (userId) => {
+  try {
+    const primaryConcerns = await knex('primary_concerns').where('user_id', userId).select('*');
+    return primaryConcerns;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch primary concerns');
+  }
+};
+
+
 module.exports = {
   getAllUsers,
   createUser,
   getUserById,
   updateUser,
   deleteUser,
+  createPrimaryConcern,
+  getPrimaryConcernsByUserId,
 };
