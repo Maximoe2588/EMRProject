@@ -82,6 +82,27 @@ const register = async (req, res, next) => {
   }
 };
 
+
+
+const createPrimaryConcern = async (req, res, next) => {
+  try {
+    
+    const { primaryConcern } = req.body;
+
+    
+    const createdPrimaryConcern = await patientInfoService.createPrimaryConcern(primaryConcern);
+
+
+    res.status(201).json(createdPrimaryConcern);
+  } catch (error) {
+
+    res.status(500).json({ error: 'Failed to create primary concern' });
+    next(error);
+  }
+};
+
+
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -89,4 +110,5 @@ module.exports = {
   updateUser,
   deleteUser,
   register,
+  createPrimaryConcern,
 };
