@@ -9,7 +9,7 @@ function App() {
   return (
     
     <Router>
-      <h1>Testing</h1>
+      <h1>We Care For You Healthcare</h1>
       <nav>
         <Link to="/login">Login</Link>
         <Link to="/dashboard">Dashboard</Link>
