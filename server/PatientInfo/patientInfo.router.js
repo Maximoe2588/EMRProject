@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const patientInfoController = require('./patientInfo.controller')
+const authController = require('./authController');
 
 
 router.get('/users', patientInfoController.getAllUsers);
@@ -8,7 +9,9 @@ router.post('/users', patientInfoController.createUser);
 router.get('/users/:id', patientInfoController.getUserById);
 router.put('/users/:id', patientInfoController.updateUser);
 router.delete('/users/:id', patientInfoController.deleteUser);
-router.post('/register', patientInfoController.register);
+router.post('/register', authController.register);;
+router.post('/primary-concerns', patientInfoController.createPrimaryConcern);
+
 
 
 module.exports = router;
