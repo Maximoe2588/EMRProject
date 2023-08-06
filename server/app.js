@@ -6,9 +6,7 @@ const router = require('./PatientInfo/patientInfo.router');
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:3001', 
-}));
+app.use(cors());
 
 app.use(morgan('combined'));
 
