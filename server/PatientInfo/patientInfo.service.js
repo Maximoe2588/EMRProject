@@ -18,7 +18,7 @@ const createUser = async (userData) => {
     const [createdUser] = await knex('users').insert(userData).returning('*');
     return { name: createdUser.name, age: createdUser.age, ...createdUser };
   } catch (error) {
-    console.error(error);
+    console.error('Detailed error', error);
     throw new Error('Failed to create user');
   }
 };

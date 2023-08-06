@@ -1,6 +1,7 @@
 const userService = require('./patientInfo.service');
 
 const register = async (req, res, next) => {
+  console.log(req.body);
   try {
     const { name, email, password } = req.body;
     const userData = { name, email, password };
