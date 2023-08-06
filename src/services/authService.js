@@ -13,12 +13,14 @@ const authService = {
             },
             body: JSON.stringify({ name, email, password }),
           });
-      
-          if (!response.ok) {
-            throw new Error('Failed to register user');
-          }
-      
-          return response.json();
+          const responseData = await response.json(); 
+
+        if (!response.ok) {
+        console.error('Server response:', responseData); 
+        throw new Error('Failed to register user');
+        }
+
+        return responseData;
         },
       };
 
