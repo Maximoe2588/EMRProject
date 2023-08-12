@@ -1,17 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import AuthContext from '../AuthContext'; //Updated
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext); //Updated
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = e => {
+  const handleLogin = async e => {
     e.preventDefault();
+    try {
+      await login(username, password);  // Updated
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Login failed', error);
+    }
+  }
+    /*e.preventDefault();
     if(username === 'test' && password === 'password') {
       navigate('/dashboard');
     }
-  }
+  }*/
 
   return (
     <div>
