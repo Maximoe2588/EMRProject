@@ -34,6 +34,16 @@ const getUserById = async (userId) => {
   }
 };
 
+const getUserByEmail = async (email) => {
+  try {
+    const user = await knex('users').where('email', email).first();
+    return user;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to fetch user by email');
+  }
+};
+
 const updateUser = async (userId, updatedUserData) => {
   try {
     
@@ -86,6 +96,7 @@ module.exports = {
   getAllUsers,
   createUser,
   getUserById,
+  getUserByEmail,
   updateUser,
   deleteUser,
   createPrimaryConcern,
