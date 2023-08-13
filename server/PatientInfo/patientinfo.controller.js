@@ -67,7 +67,7 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-const register = async (req, res, next) => {
+/*const register = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
     const userData = { name, email, password };
@@ -80,7 +80,7 @@ const register = async (req, res, next) => {
     res.status(500).json({ error: 'Failed to register user' });
     next(error);
   }
-};
+};*/
 
 
 
@@ -109,6 +109,6 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
-  register,
+  //register,
   createPrimaryConcern,
 };

@@ -11,6 +11,8 @@ router.put('/users/:id', patientInfoController.updateUser);
 router.delete('/users/:id', patientInfoController.deleteUser);
 router.post('/register', authController.register);;
 router.post('/primary-concerns', patientInfoController.createPrimaryConcern);
+router.post('/login', authController.loginUser);
+
 
 
 

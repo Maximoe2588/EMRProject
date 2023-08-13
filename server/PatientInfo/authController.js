@@ -54,4 +54,5 @@ const loginUser = async (req, res, next) => {
 
 module.exports = {
   register,
+  loginUser,
 };
