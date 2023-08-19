@@ -27,6 +27,8 @@ const loginUser = async (req, res, next) => {
 
       const user = await userService.getUserByEmail(email); 
 
+      console.log('User Data:', email, password);
+
       if (!user) {
           return res.status(401).json({ error: 'Authentication failed. User not found.' });
       }
@@ -43,7 +45,12 @@ const loginUser = async (req, res, next) => {
           { expiresIn: '1h' }
       );
 
-      res.json({ token, userId: user.id, email: user.email });
+      res.json({ token, 
+        userId: user.id, 
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name 
+      });
 
   } catch (error) {
       res.status(500).json({ error: 'Login failed.' });

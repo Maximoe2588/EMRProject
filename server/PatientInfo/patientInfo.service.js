@@ -36,7 +36,7 @@ const getUserById = async (userId) => {
 
 const getUserByEmail = async (email) => {
   try {
-    const user = await knex('users').where('email', email).first();
+    const user = await knex('users').where('email', email).first('id', 'email', 'first_name', 'last_name');
     return user;
   } catch (error) {
     console.error(error);
