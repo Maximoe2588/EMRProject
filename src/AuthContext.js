@@ -11,14 +11,14 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
-  const login = async (username, password) => {
+  const login = async (email, password) => {
     try {
       const response = await fetch('http://localhost:3000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (!response.ok) {
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      if (data.success) {  //Updated
+      if (data.token) {  //Updated
         setIsLoggedIn(true);
       } else {
         throw new Error(data.message || 'Unknown error during login');
