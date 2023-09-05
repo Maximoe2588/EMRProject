@@ -26,9 +26,13 @@ export const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      if (data.token) {  //Updated
+      if (data.token) {
+        // Store the token in local storage and cookies
+        localStorage.setItem('authToken', data.token);
+        document.cookie = `authToken=${data.token}; path=/`;
         setIsLoggedIn(true);
-      } else {
+      }
+       else {
         throw new Error(data.message || 'Unknown error during login');
       }
     } catch (error) {
@@ -36,8 +40,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    
+    localStorage.removeItem('authToken');
+    document.cookie = 'authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    setIsLoggedIn(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ login, isLoggedIn }}>
+    <AuthContext.Provider value={{ login, logout, isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );
