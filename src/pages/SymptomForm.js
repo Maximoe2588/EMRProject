@@ -10,6 +10,8 @@ function SymptomForm() {
     symptomOccurrence: ''
   });
 
+  const token = localStorage.getItem('authToken');
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -22,7 +24,8 @@ function SymptomForm() {
     fetch('/api/symptoms', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(formData)
     })
