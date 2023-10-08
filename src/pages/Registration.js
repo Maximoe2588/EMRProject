@@ -12,7 +12,7 @@ function Registration() {
   const handleRegister = async e => {
     e.preventDefault();
     try {
-      console.log('Registering:', firstName, lastName, email, password);
+      
       await authService.register(firstName, lastName, email, password);
       navigate('/login');
     } catch (error) {
