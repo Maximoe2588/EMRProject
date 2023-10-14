@@ -3,6 +3,10 @@ const router = express.Router();
 const patientInfoController = require('./patientInfo.controller')
 const authController = require('./authController');
 
+const bodyParser = require('body-parser');
+
+router.use(bodyParser.json());
+
 
 router.get('/users', patientInfoController.getAllUsers);
 router.post('/users', patientInfoController.createUser);

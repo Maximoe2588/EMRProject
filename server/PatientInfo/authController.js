@@ -25,25 +25,39 @@ const loginUser = async (req, res, next) => {
   try {
       const { email, password } = req.body;
 
+      console.log('Received login request:', { email, password });
+
       const user = await userService.getUserByEmail(email); 
 
-      console.log('User Data:', email, password);
+      console.log("Queried user:", user);
 
       if (!user) {
-          return res.status(401).json({ error: 'Authentication failed. User not found.' });
-      }
+        return res.status(401).json({ error: 'Authentication failed. User not found.' });
+    }
 
+      
       const isPasswordValid = await bcrypt.compare(password, user.password);
+      console.log("Password validity:", isPasswordValid);
 
+
+     
       if (!isPasswordValid) {
           return res.status(401).json({ error: 'Authentication failed. Wrong password.' });
       }
+      
+      console.log("JWT data:", { userId: user.id, email: user.email });
+
+      console.log("JWT Secret:", process.env.JWT_SECRET);
 
       const token = jwt.sign(
           { userId: user.id, email: user.email },
           process.env.JWT_SECRET, 
           { expiresIn: '1h' }
       );
+
+      console.log("Generated JWT:", token);
+    
+
 
       res.json({ token, 
         userId: user.id, 
@@ -53,8 +67,9 @@ const loginUser = async (req, res, next) => {
       });
 
   } catch (error) {
+    console.error(error); 
       res.status(500).json({ error: 'Login failed.' });
-      next(error);
+      
   }
 };
 
