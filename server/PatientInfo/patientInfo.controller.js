@@ -67,22 +67,6 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-/*const register = async (req, res, next) => {
-  try {
-    const { name, email, password } = req.body;
-    const userData = { name, email, password };
-
-    const createdUser = await userService.createUser(userData);
-
-    res.status(201).json({ message: 'Registration successful', user: { name: createdUser.name, age: createdUser.age },
-  });
- } catch (error) {
-    res.status(500).json({ error: 'Failed to register user' });
-    next(error);
-  }
-};*/
-
-
 
 const createPrimaryConcern = async (req, res, next) => {
   try {
@@ -109,6 +93,5 @@ module.exports = {
   getUserById,
   updateUser,
   deleteUser,
-  //register,
   createPrimaryConcern,
 };

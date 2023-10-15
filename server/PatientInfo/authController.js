@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const userService = require('./patientInfo.service');
+const HttpError= require('../errors/HttpError');
 
 const register = async (req, res, next) => {
   console.log("Received registration request for:", req.body);
@@ -16,8 +17,7 @@ const register = async (req, res, next) => {
 
     res.status(201).json({ message: 'Registration successful', user: { first_name: createdUser.first_name, last_name: createdUser.last_name, age: createdUser.age } });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to register user' });
-    next(error);
+    next(new HttpError(500, 'Failed to register user'));
   }
 };
 
@@ -32,7 +32,7 @@ const loginUser = async (req, res, next) => {
       console.log("Queried user:", user);
 
       if (!user) {
-        return res.status(401).json({ error: 'Authentication failed. User not found.' });
+        throw new HttpError(401, 'Authentication failed. User not found.');
     }
 
       
@@ -42,8 +42,9 @@ const loginUser = async (req, res, next) => {
 
      
       if (!isPasswordValid) {
-          return res.status(401).json({ error: 'Authentication failed. Wrong password.' });
+        throw new HttpError(401, 'Authentication failed. Wrong password.');
       }
+      
       
       console.log("JWT data:", { userId: user.id, email: user.email });
 
@@ -67,10 +68,12 @@ const loginUser = async (req, res, next) => {
       });
 
   } catch (error) {
-    console.error(error); 
-      res.status(500).json({ error: 'Login failed.' });
-      
-  }
+    if (error instanceof HttpError) {
+        next(error);
+    } else {
+        next(new HttpError(500, 'Login failed.'));
+    }
+}
 };
 
 
