@@ -1,20 +1,28 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import  AuthContext  from '../AuthContext';
+import { login } from '../api/authApi';
+
 
 function LandingPage() {
 
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login: loginContext } = useContext(AuthContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await login(username, password);
+      const data = await login(username, password);
+      if (data.token) {
+        localStorage.setItem('authToken', data.token);
+        loginContext(username, password);  
       navigate('/dashboard');
-    } catch (error) {
+    } else {
+      throw new Error(data.message || 'Unknown error during login');
+    } 
+  } catch (error) {
       console.error(error);
     }
   };

@@ -1,10 +1,10 @@
-// src/pages/Dashboard.js
 import React from 'react';
 import PrimaryConcernForm from './PrimaryConcernForm';
+import { createPrimaryConcern } from '../api/userApi';
 
 function Dashboard() {
 
-  const handlePrimaryConcernSubmit = async (primaryConcern) => {
+  /*const handlePrimaryConcernSubmit = async (primaryConcern) => {
     try {
       const response = await fetch('http://localhost:3000/api/primary-concerns', {
         method: 'POST',
@@ -23,8 +23,18 @@ function Dashboard() {
     } catch (error) {
       console.error('Error creating primary concern:', error);
     }
-  };
-  
+  };*/
+  const handlePrimaryConcernSubmit = async (primaryConcern) => {
+    const token = localStorage.getItem('authToken');
+
+    try {
+        await createPrimaryConcern(primaryConcern, token);  // Use the function
+        console.log('Primary Concern created:', primaryConcern);
+    } catch (error) {
+        console.error('Error creating primary concern:', error);
+    }
+};
+
 
   return (
     <div>
